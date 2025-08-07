@@ -10,7 +10,7 @@ namespace Statistic.Endpoints
 
             group.MapGet("/", () =>
             {
-                return Results.NoContent;
+                return Results.Ok();
             });
 
             return group;

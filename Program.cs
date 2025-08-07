@@ -1,3 +1,5 @@
+using Statistic.Endpoints;
+
 namespace Statistic
 {
     public class Program
@@ -7,6 +9,8 @@ namespace Statistic
             var builder = WebApplication.CreateBuilder(args);
 
             var app = builder.Build();
+
+            app.MapStatisticEndpoints();
 
             app.Run();
         }

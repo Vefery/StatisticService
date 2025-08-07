@@ -6,7 +6,8 @@ namespace Statistic.Endpoints
     {
         public static RouteGroupBuilder MapStatisticEndpoints(this WebApplication app)
         {
-            RouteGroupBuilder group = app.MapGroup("statistics");
+            RouteGroupBuilder group = app.MapGroup("statistics")
+                .WithParameterValidation();
 
             group.MapGet("/", () =>
             {

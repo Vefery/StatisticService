@@ -11,7 +11,7 @@ namespace Statistic.DTOs
         [Required] string version
     )
     {
-        public StatisticEntry ToEntiry()
+        public StatisticEntry ToEntry()
         {
             return new StatisticEntry
             {

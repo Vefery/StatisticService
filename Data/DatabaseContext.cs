@@ -5,6 +5,6 @@ namespace Statistic.Data
 {
     public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
     {
-        DbSet<StatisticEntry> Statistics { get; set; }
+        public DbSet<StatisticEntry> Statistics { get; set; }
     }
 }

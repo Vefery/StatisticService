@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Statistic.Data;
 
 namespace Statistic.Endpoints
 {
@@ -9,8 +10,15 @@ namespace Statistic.Endpoints
             RouteGroupBuilder group = app.MapGroup("statistics")
                 .WithParameterValidation();
 
-            group.MapGet("/", () =>
+            group.MapGet("/", (ILogger<Program> logger, DatabaseContext dbContext) =>
             {
+
+                return Results.Ok();
+            });
+
+            group.MapPost("/", (ILogger<Program> logger, DatabaseContext dbContext) =>
+            {
+
                 return Results.Ok();
             });
 

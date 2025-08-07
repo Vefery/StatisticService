@@ -1,0 +1,29 @@
+@import "~src/styles.less";
+
+.entryButton {
+    width: 100%;
+    height: 50px;
+    background-color: @secondaryContainerColor;
+    border: none;
+    padding: 5px;
+    height: fit-content;
+    .rounded-corners-small();
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.text {
+    width: 100%;
+    text-overflow: ellipsis;
+    text-align: left;
+    overflow: hidden;
+    text-wrap: pretty;
+    color: @onSecondaryContainerColor;
+}

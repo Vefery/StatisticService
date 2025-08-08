@@ -12,11 +12,21 @@ namespace Statistic
             builder.Services.AddDbContext<DatabaseContext>(options =>
                 options.UseInMemoryDatabase(builder.Configuration.GetConnectionString("DbName") ?? "TestDatabase")
             );
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
             builder.Logging.ClearProviders();
             builder.Logging.AddDebug();
 
             var app = builder.Build();
 
+            app.UseCors();
             app.MapStatisticEndpoints();
             app.Logger.LogInformation("Added endpoints");
 

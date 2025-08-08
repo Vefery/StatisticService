@@ -14,20 +14,42 @@ namespace Statistic.Endpoints
             RouteGroupBuilder group = app.MapGroup("statistics")
                 .WithParameterValidation();
 
-            group.MapGet("/", async (ILogger<Program> logger, DatabaseContext dbContext) =>
+            group.MapGet("/devices", async (ILogger<Program> logger, DatabaseContext dbContext) =>
             {
                 try
                 {
-                    List<StatisticEntryDTO> statistics = await dbContext.Statistics
+                    List<DeviceDTO> devices = await dbContext.Statistics
                         .AsNoTracking()
+                        .GroupBy(entry => new { entry.DeviceId, entry.Name })
+                        .Select(entry => DeviceDTO.ToDTO(entry.Key.DeviceId, entry.Key.Name, entry.Count()))
+                        .ToListAsync();
+                    logger.LogInformation("Получены все девавйсы из базы данных");
+
+                    return Results.Ok(devices);
+                }
+                catch (Exception e)
+                {
+                    logger.LogError("Ошибка во время получения записей из базы данных: {ER}", e);
+                    return Results.Problem(
+                        title: "Server Error",
+                        statusCode: 500,
+                        detail: "Ошибка обращения к базе данных"
+                    );
+                }
+            });
+
+            group.MapGet("/devices/{_id}", async (ILogger<Program> logger, DatabaseContext dbContext, string _id) =>
+            {
+                try
+                {
+                    List<StatisticEntryDTO> devices = await dbContext.Statistics
+                        .AsNoTracking()
+                        .Where(entry => entry.DeviceId == _id)
                         .Select(entry => StatisticEntryDTO.ToDTO(entry))
                         .ToListAsync();
-                    logger.LogInformation("Получены все записи из базы данных");
+                    logger.LogInformation("Получены все записи девайса из базы данных");
 
-                    StatisticsDTO staitisticsListDto = new (statistics);
-                    logger.LogInformation("Создано DTO со списком записей");
-
-                    return Results.Ok(staitisticsListDto);
+                    return Results.Ok(devices);
                 }
                 catch (Exception e)
                 {

@@ -9,7 +9,7 @@ namespace Statistic.DTOs
         [Required] DateTime startTime,
         [Required] DateTime endTime,
         [Required] string version
-    )
+    ) : IDeviceGeneralData
     {
         public StatisticEntry ToEntry()
         {

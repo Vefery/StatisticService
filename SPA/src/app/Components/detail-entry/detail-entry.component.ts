@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { StatisticEntryDTO } from 'src/app/DTOs/StatisticEntryDTO';
-import { StateService } from 'src/app/Services/state-service.service';
 
 @Component({
   selector: 'app-detail-entry',
@@ -9,4 +8,8 @@ import { StateService } from 'src/app/Services/state-service.service';
 })
 export class DetailEntryComponent {
   @Input() data!: StatisticEntryDTO; 
+
+  ngOnInit(): void {
+    console.log(this.data.startTime.getDay());
+  }
 }

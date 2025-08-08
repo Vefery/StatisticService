@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StatisticEntryDTO } from '../DTOs/StatisticEntryDTO';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { DeviceDTO } from '../DTOs/DeviceDTO';
 
 @Injectable({
@@ -23,7 +23,15 @@ export class ApiHandlerService {
 
     getDeviceInfo(id: string): Observable<StatisticEntryDTO[]> {
       try {
-        return this.http.get<StatisticEntryDTO[]>(`${this.apiUrl}/statistics/devices/${id}`);
+        return this.http.get<StatisticEntryDTO[]>(`${this.apiUrl}/statistics/devices/${id}`).pipe(
+          map(entries => entries.map(
+            entry => ({
+              ...entry,
+              startTime: new Date(entry.startTime),
+              endTime: new Date(entry.endTime)
+            })
+          ))
+        );
       } catch (e) {
         console.error('Ошибка получения данных с сервера: ', e)
         return of([]);

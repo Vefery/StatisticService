@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { DeviceDTO } from 'src/app/DTOs/DeviceDTO';
 
 @Component({
   selector: 'app-list-entry',
@@ -6,12 +7,11 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./list-entry.component.less']
 })
 export class ListEntryComponent {
-  @Input() deviceId!: string;
-  @Input() name!: string;
+  @Input() data!: DeviceDTO;
 
-  @Output() entryClick = new EventEmitter();
+  @Output() entryClick = new EventEmitter<DeviceDTO>();
 
-  OnClick() {
-    this.entryClick.emit()
+  OnClick(device: DeviceDTO) {
+    this.entryClick.emit(device);
   }
 }

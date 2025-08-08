@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { StatisticEntryDTO } from 'src/app/DTOs/StatisticEntryDTO';
+import { StateService } from 'src/app/Services/state-service.service';
 
 @Component({
   selector: 'app-detail-entry',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./detail-entry.component.less']
 })
 export class DetailEntryComponent {
-
+  @Input() data!: StatisticEntryDTO; 
 }

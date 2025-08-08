@@ -1,8 +1,9 @@
 <div class="container">
     <div class="surface">
         <app-list-entry 
-            deviceId="f695ea23-8662-4a57-975a-f5afd26655db"
-            name="Иван Иванов"
+            *ngFor="let device of devices"
+            [data]="device"
+            (entryClick)="onSelect($event)"
         ></app-list-entry>
     </div>
 </div>

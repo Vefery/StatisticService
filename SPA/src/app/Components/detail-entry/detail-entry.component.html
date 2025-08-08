@@ -1,11 +1,11 @@
 <div class="container">
     <span>
-        Начало активности: 2024 07 31 17:56
+        Начало активности: {{data.startTime.toLocaleString("en-GB", { timeZone: "UTC" })}}
     </span>
     <span>
-        Конец активности: 2024 08 1 17:56
+        Конец активности: {{data.endTime.toLocaleString()}}
     </span>
     <span>
-        Версия: 1.0006
+        Версия: {{data.version}}
     </span>
 </div>

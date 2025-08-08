@@ -1,7 +1,10 @@
-<div class="surface">
-    <h1>Устройство: fvgbhnuk,lkmnbvcxfvgbhn,okmnbvfcgb</h1>
-    <h1>Имя пользователя: Иванов иван</h1>
+<div class="surface" *ngIf="currentDevice !== undefined">
+    <h1>Устройство: {{currentDevice._id}}</h1>
+    <h1>Имя пользователя: {{currentDevice.name}}</h1>
     <div class="detailsPanel">
-        <app-detail-entry></app-detail-entry>
+        <app-detail-entry
+            *ngFor="let entry of historyEntries"
+            [data]="entry"
+        ></app-detail-entry>
     </div>
 </div>

@@ -1,0 +1,26 @@
+@import "~src/styles.less";
+
+:host {
+    display: flex;
+    height: 100%;
+    flex-basis: 100%;
+    padding: 5px;
+}
+
+.surface {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: @onBackgroundColor;
+    .rounded-corners-small();
+}
+
+.detailsPanel {
+    width: 100%;
+    height: 100%;
+    flex-basis: 100%;
+    background: none;
+    .rounded-corners-small();
+}

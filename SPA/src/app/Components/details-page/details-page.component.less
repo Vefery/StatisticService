@@ -28,3 +28,23 @@
     gap: 10px;
     overflow-x: hidden;
 }
+
+.info {
+    display: flex;
+    flex-direction: row;
+}
+
+.downloadButton {
+    width: fit-content;
+    height: fit-content;
+    padding: 5px;
+    background-color: @tertiaryContainerColor;
+    .rounded-corners-small();
+    border-color: #eec0f2;
+    border-style: solid;
+    color: @onTertiaryContainerColor;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

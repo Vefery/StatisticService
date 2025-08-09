@@ -1,6 +1,15 @@
 <div class="surface" *ngIf="currentDevice !== undefined">
-    <h1>Устройство: {{currentDevice._id}}</h1>
-    <h1>Имя пользователя: {{currentDevice.name}}</h1>
+    <div class="info">
+        <div [ngStyle]="{flexBasis: '100%'}">
+            <h1>Устройство: {{currentDevice._id}}</h1>
+            <h1>Имя пользователя: {{currentDevice.name}}</h1>
+        </div>
+        <button class="downloadButton" (click)="onDownload()">
+            <span>
+                Сохранить в JSON
+            </span>
+        </button>
+    </div>
     <div class="detailsPanel">
         <app-detail-entry
             *ngFor="let entry of historyEntries"

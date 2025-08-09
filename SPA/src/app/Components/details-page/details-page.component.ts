@@ -41,4 +41,14 @@ export class DetailsPageComponent {
         error: (er) => console.error("Failed to delete entry", er)
     });
   }
+  onDownload() {
+    const jsonString = JSON.stringify(this.historyEntries.map(({ id, ...rest }) => rest));
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${this.currentDevice!._id}_statistics.json`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
 }

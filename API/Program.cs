@@ -21,6 +21,8 @@ namespace Statistic
                         .AllowAnyMethod();
                 });
             });
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
             builder.Logging.ClearProviders();
             builder.Logging.AddDebug();
 
@@ -29,6 +31,12 @@ namespace Statistic
             app.UseCors();
             app.MapStatisticEndpoints();
             app.Logger.LogInformation("Added endpoints");
+
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
             app.Run();
         }

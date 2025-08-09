@@ -10,13 +10,12 @@ namespace Statistic.DTOs
     }
     public record DeviceDTO(
         string _id,
-        string name,
-        int entries
+        string name
     ) : IDeviceGeneralData
     {
-        public static DeviceDTO ToDTO(string deviceId, string name, int count)
+        public static DeviceDTO ToDTO(string deviceId, string name)
         {
-            return new DeviceDTO(deviceId, name, count);
+            return new DeviceDTO(deviceId, name);
         }
     }
 }

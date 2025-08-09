@@ -1,5 +1,4 @@
-import { GeneralDeviceDTO } from "./StatisticEntryDTO";
-
-export interface DeviceDTO extends GeneralDeviceDTO {
-   entries: number 
+export interface DeviceDTO {
+   _id: string;
+   name: string;
 }

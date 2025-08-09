@@ -21,7 +21,7 @@ namespace Statistic.Endpoints
                     List<DeviceDTO> devices = await dbContext.Statistics
                         .AsNoTracking()
                         .GroupBy(entry => new { entry.DeviceId, entry.Name })
-                        .Select(entry => DeviceDTO.ToDTO(entry.Key.DeviceId, entry.Key.Name, entry.Count()))
+                        .Select(entry => DeviceDTO.ToDTO(entry.Key.DeviceId, entry.Key.Name))
                         .ToListAsync();
                     logger.LogInformation("Получены все девавйсы из базы данных");
 

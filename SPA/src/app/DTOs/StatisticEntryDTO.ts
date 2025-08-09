@@ -1,9 +1,6 @@
-export interface GeneralDeviceDTO {
-    _id: string;
-    name: string;
-}
+import { DeviceDTO } from "./DeviceDTO";
 
-export interface StatisticEntryDTO extends GeneralDeviceDTO {
+export interface StatisticEntryDTO extends DeviceDTO {
     id: number;
     startTime: Date;
     endTime: Date;

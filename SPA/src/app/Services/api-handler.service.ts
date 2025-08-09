@@ -3,12 +3,13 @@ import { StatisticEntryDTO } from '../DTOs/StatisticEntryDTO';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
 import { DeviceDTO } from '../DTOs/DeviceDTO';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiHandlerService {
-    private apiUrl = 'http://localhost:8080';
+    private apiUrl = environment.apiUrl;
 
     constructor(private http: HttpClient) { }
 

@@ -21,10 +21,10 @@ export class DetailsPageComponent {
     this.subscription = this.state.currentDevice$.pipe(
       switchMap(
         device => {
+          this.currentDevice = device;
           if (device === undefined)
             return of([])
           else {
-            this.currentDevice = device;
             return this.http.getDeviceInfo(device._id);
           }
         }
@@ -37,7 +37,11 @@ export class DetailsPageComponent {
   }
   onDeleteEntry(id: number) {
     this.http.deleteStatisticsEntry(id).subscribe({
-        next: () => this.historyEntries = this.historyEntries.filter((entry) => entry.id !== id),
+        next: () => {
+          this.historyEntries = this.historyEntries.filter((entry) => entry.id !== id);
+          if (this.historyEntries.length === 0)
+            this.state.removeCurrentDevice();
+        },
         error: (er) => console.error("Failed to delete entry", er)
     });
   }

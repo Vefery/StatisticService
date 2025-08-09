@@ -17,6 +17,11 @@ export class LeftPanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription = this.apiHandler.getAllDevices().subscribe((devices) => this.devices = devices);
+    this.state.updateDevicesEvent.subscribe(() => {
+      this.subscription = this.apiHandler.getAllDevices().subscribe(
+        (devices) => this.devices = devices
+      );
+    });
   }
 
   ngOnDestroy(): void {

@@ -11,10 +11,10 @@ namespace Statistic.Endpoints
         const string getStatisticsName = "GetEntry";
         public static RouteGroupBuilder MapStatisticEndpoints(this WebApplication app)
         {
-            RouteGroupBuilder group = app.MapGroup("statistics")
+            RouteGroupBuilder group = app.MapGroup("devices")
                 .WithParameterValidation();
 
-            group.MapGet("/devices", async (ILogger<Program> logger, DatabaseContext dbContext) =>
+            group.MapGet("/", async (ILogger<Program> logger, DatabaseContext dbContext) =>
             {
                 try
                 {
@@ -32,20 +32,19 @@ namespace Statistic.Endpoints
                     logger.LogError("Ошибка во время получения записей из базы данных: {ER}", e);
                     return Results.Problem(
                         title: "Server Error",
-                        statusCode: 500,
-                        detail: "Ошибка обращения к базе данных"
+                        statusCode: 500
                     );
                 }
             });
 
-            group.MapGet("/devices/{_id}", async (ILogger<Program> logger, DatabaseContext dbContext, string _id) =>
+            group.MapGet("/{_id}/statistics", async (ILogger<Program> logger, DatabaseContext dbContext, string _id) =>
             {
                 try
                 {
-                    List<StatisticEntryDTO> devices = await dbContext.Statistics
+                    List<ResponseStatisticEntryDTO> devices = await dbContext.Statistics
                         .AsNoTracking()
                         .Where(entry => entry.DeviceId == _id)
-                        .Select(entry => StatisticEntryDTO.ToDTO(entry))
+                        .Select(entry => ResponseStatisticEntryDTO.ToDTO(entry))
                         .ToListAsync();
                     logger.LogInformation("Получены все записи девайса из базы данных");
 
@@ -56,8 +55,7 @@ namespace Statistic.Endpoints
                     logger.LogError("Ошибка во время получения записей из базы данных: {ER}", e);
                     return Results.Problem(
                         title: "Server Error",
-                        statusCode: 500,
-                        detail: "Ошибка обращения к базе данных"
+                        statusCode: 500
                     );
                 }
             })
@@ -85,8 +83,31 @@ namespace Statistic.Endpoints
                     logger.LogError("Ошибка во время добавления записи: {ER}", e);
                     return Results.Problem(
                         title: "Server Error",
-                        statusCode: 500,
-                        detail: "Ошибка обращения к базе данных"
+                        statusCode: 500
+                    );
+                }
+            });
+
+            group.MapDelete("/{_id}/statistics/{entryId}", async (ILogger<Program> logger, DatabaseContext dbContext, int entryId) =>
+            {
+                try
+                {
+                    StatisticEntry? entry = await dbContext.Statistics.FindAsync(entryId);
+                    if (entry is not null)
+                    {
+                        logger.LogInformation("Найдена нужная запись для удаления");
+                        dbContext.Statistics.Remove(entry);
+                        await dbContext.SaveChangesAsync();
+                        return Results.NoContent();
+                    }
+                    else
+                        return Results.BadRequest();
+                } catch (Exception e)
+                {
+                    logger.LogError("Ошибка во время удаления записи: {ER}", e);
+                    return Results.Problem(
+                        title: "Server Error",
+                        statusCode: 500
                     );
                 }
             });

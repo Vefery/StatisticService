@@ -5,6 +5,7 @@
         <app-detail-entry
             *ngFor="let entry of historyEntries"
             [data]="entry"
+            (deleteClick)="onDeleteEntry($event)"
         ></app-detail-entry>
     </div>
 </div>

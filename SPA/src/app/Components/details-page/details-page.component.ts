@@ -29,9 +29,15 @@ export class DetailsPageComponent {
         }
       )
     )
-      .subscribe((info) => {console.log(info); this.historyEntries = info});
+      .subscribe((info) => this.historyEntries = info);
   }
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
+  }
+  onDeleteEntry(id: number) {
+    this.http.deleteStatisticsEntry(id).subscribe({
+        next: () => this.historyEntries = this.historyEntries.filter((entry) => entry.id !== id),
+        error: (er) => console.error("Failed to delete entry", er)
+    });
   }
 }

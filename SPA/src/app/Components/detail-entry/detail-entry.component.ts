@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { StatisticEntryDTO } from 'src/app/DTOs/StatisticEntryDTO';
 
 @Component({
@@ -7,9 +7,10 @@ import { StatisticEntryDTO } from 'src/app/DTOs/StatisticEntryDTO';
   styleUrls: ['./detail-entry.component.less']
 })
 export class DetailEntryComponent {
-  @Input() data!: StatisticEntryDTO; 
+  @Input() data!: StatisticEntryDTO;
+  @Output() deleteClick = new EventEmitter<number>();
 
-  ngOnInit(): void {
-    console.log(this.data.startTime.getDay());
+  onDelete(id: number) {
+    this.deleteClick.emit(id);
   }
 }

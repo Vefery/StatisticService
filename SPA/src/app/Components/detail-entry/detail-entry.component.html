@@ -1,11 +1,16 @@
 <div class="container">
-    <span>
-        Начало активности: {{data.startTime.toLocaleString()}}
-    </span>
-    <span>
-        Конец активности: {{data.endTime.toLocaleString()}}
-    </span>
-    <span>
-        Версия: {{data.version}}
-    </span>
+    <div class="info">
+        <span>
+            Начало активности: {{data.startTime.toLocaleString()}}
+        </span>
+        <span>
+            Конец активности: {{data.endTime.toLocaleString()}}
+        </span>
+        <span>
+            Версия: {{data.version}}
+        </span>
+    </div>
+    <button class="deleteButton" (click)="onDelete(data.id)">
+        <span>╳</span>
+    </button>
 </div>

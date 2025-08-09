@@ -3,8 +3,29 @@
 .container {
     display: flex;
     padding: 5px;
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: row;
+    align-items: center;
     background-color: @secondaryContainerColor;
     .rounded-corners-small()
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-basis: 100%;
+}
+
+.deleteButton {
+    width: 25px;
+    height: 25px;
+    background-color: @onSecondaryContainerColor;
+    .rounded-corners-small();
+    border: none;
+    font-size: 10px;
+    color: white;
+
+    &:hover {
+        cursor: pointer;
+    }
 }

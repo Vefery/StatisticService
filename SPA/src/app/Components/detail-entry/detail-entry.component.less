@@ -5,7 +5,7 @@
     padding: 5px;
     flex-direction: row;
     align-items: center;
-    background-color: @secondaryContainerColor;
+    background-color: @primaryContainerColor;
     .rounded-corners-small()
 }
 
@@ -14,17 +14,17 @@
     flex-direction: column;
     gap: 5px;
     flex-basis: 100%;
+    color: @onPrimaryContainerColor;
 }
 
 .deleteButton {
     width: 25px;
     height: 25px;
-    background-color: @tertiaryContainerColor;
+    background-color: @secondaryContainerColor;
     .rounded-corners-small();
-    border-color: #eec0f2;
-    border-style: solid;
+    border: none;
     font-size: 10px;
-    color: @onTertiaryContainerColor;
+    color: @onSecondaryContainerColor;
 
     &:hover {
         cursor: pointer;

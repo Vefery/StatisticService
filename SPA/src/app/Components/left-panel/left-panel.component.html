@@ -1,9 +1,16 @@
 <div class="container">
     <div class="surface">
-        <app-list-entry 
-            *ngFor="let device of devices"
-            [data]="device"
-            (entryClick)="onSelect($event)"
-        ></app-list-entry>
+        <span class="header">
+            Устройства:
+        </span>
+        <hr>
+        <ng-template #placeholder>
+            <app-list-entry
+                *ngFor="let device of devices"
+                [data]="device"
+                (entryClick)="onSelect($event)"
+            ></app-list-entry>
+        </ng-template>
+        <span *ngIf="devices.length === 0; else placeholder" class="placeholder">Пусто...</span>
     </div>
 </div>

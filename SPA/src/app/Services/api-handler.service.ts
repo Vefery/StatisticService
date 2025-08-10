@@ -14,6 +14,7 @@ export class ApiHandlerService {
     constructor(private http: HttpClient) { }
 
     getAllDevices(): Observable<DeviceDTO[]> {
+      console.log(this.apiUrl);
       return this.http.get<DeviceDTO[]>(`${this.apiUrl}/devices`).pipe(
         catchError((err) => {
           console.error('Ошибка получения данных с сервера: ', err)

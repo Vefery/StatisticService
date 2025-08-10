@@ -1,5 +1,4 @@
-// src/environments/environment.ts (Development)
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:8080', // Default for local dev
+    apiUrl: 'https://localhost:44362'
   };

@@ -3,18 +3,10 @@ services:
     image: web-api
     ports:
       - "8080:8080" 
-    networks:
-      - app-network
 
   spa:
     image: spa-app
     ports:
       - "4200:8080"
-    networks:
-      - app-network
     depends_on:
       - api
-
-networks:
-  app-network:
-    driver: bridge
